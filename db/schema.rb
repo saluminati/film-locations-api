@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219042550) do
+ActiveRecord::Schema.define(version: 20180219091214) do
+
+  create_table "actors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",       limit: 100, default: "", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  create_table "actors_movies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "movie_id", null: false
+    t.integer "actor_id", null: false
+    t.index ["movie_id", "actor_id"], name: "index_actors_movies_on_movie_id_and_actor_id", unique: true, using: :btree
+  end
 
   create_table "movies", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",        limit: 100, default: "", null: false
@@ -18,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180219042550) do
     t.string   "writter",      limit: 100, default: "", null: false
     t.datetime "created_at",                            null: false
     t.datetime "updated_at",                            null: false
+    t.string   "director",     limit: 100, default: "", null: false
   end
 
 end

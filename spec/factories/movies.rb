@@ -3,5 +3,6 @@ FactoryBot.define do
     title 'Some movie'
     release_year 2017
     writter 'Umarji Anuradha, Jayendr… Aarthi Sriram, & Suba'
+    director 'Someone'
   end
 end
