@@ -1,10 +1,7 @@
-class Actor < ApplicationRecord
-
+class ProductionCompany < ApplicationRecord
   validates :name,
-            :presence => true,
             :length => {:minimum => 5, :maximum => 100 },
-            :uniqueness => true
+            :presence => true
 
   has_and_belongs_to_many :movies
-
 end

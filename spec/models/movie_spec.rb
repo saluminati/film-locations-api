@@ -79,13 +79,27 @@ RSpec.describe Movie, type: :model do
     end
   end
 
-  it 'assigns actors to a movie' do
+  it 'assign actors to a movie' do
     actor = FactoryBot.create(:actor)
     actor2 = FactoryBot.create(:actor, name: 'Another name')
     movie = FactoryBot.create(:movie)
     movie.actors << actor
     movie.actors << actor2
     expect(movie.actors.length).to eq(2)
+  end
+
+  it 'assign distributor to a movie' do
+    distributor = FactoryBot.create(:distributor)
+    movie = FactoryBot.create(:movie)
+    movie.distributors << distributor
+    expect(movie.distributors.length).to eq(1)
+  end
+
+  it 'assign Production Company to a movie' do
+    production_company = FactoryBot.create(:production_company)
+    movie = FactoryBot.create(:movie)
+    movie.production_companies << production_company
+    expect(movie.production_companies.length).to eq(1)
   end
 
 
