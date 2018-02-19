@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219105448) do
+ActiveRecord::Schema.define(version: 20180219115015) do
 
   create_table "actors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",       limit: 100, default: "", null: false
@@ -56,4 +56,18 @@ ActiveRecord::Schema.define(version: 20180219105448) do
     t.datetime "updated_at",                          null: false
   end
 
+  create_table "shooting_locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "address"
+    t.float    "latitude",   limit: 24
+    t.float    "longitude",  limit: 24
+    t.text     "fun_facts",  limit: 65535
+    t.integer  "movie_id"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "country",    limit: 100,   default: "", null: false
+    t.string   "city",       limit: 100,   default: "", null: false
+    t.index ["movie_id"], name: "index_shooting_locations_on_movie_id", using: :btree
+  end
+
+  add_foreign_key "shooting_locations", "movies"
 end
