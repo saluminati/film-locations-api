@@ -22,17 +22,17 @@ RSpec.describe Movie, type: :model do
       expect(movie.errors[:release_year]).to include("is not a number")
     end
 
-    it 'invalidates, if the release_year is less than 1920' do
-      movie = FactoryBot.build(:movie, release_year: 1919)
+    it 'invalidates, if the release_year is less than 1900' do
+      movie = FactoryBot.build(:movie, release_year: 1899)
       movie.valid?
-      expect(movie.errors[:release_year]).to include("must be greater than 1920")
+      expect(movie.errors[:release_year]).to include("must be greater than 1900")
     end
 
     it 'invalidates, if the release_year is greater than current year' do
       year = (Date.today.year)+1
       movie = FactoryBot.build(:movie, release_year: year)
       movie.valid?
-      expect(movie.errors[:release_year]).to include("must be less than #{Date.today.year}")
+      expect(movie.errors[:release_year]).to include("must be less than #{year}")
     end
 
   end
@@ -48,20 +48,6 @@ RSpec.describe Movie, type: :model do
       movie = FactoryBot.build(:movie, title: nil)
       movie.valid?
       expect(movie.errors[:title]).to include("can't be blank")
-    end
-  end
-
-  context 'invalid or empty writter is provided' do
-    it 'invalidates, when writter is empty' do
-      movie = FactoryBot.build(:movie, writter: "")
-      movie.valid?
-      expect(movie.errors[:writter]).to include("can't be blank")
-    end
-
-    it 'invalidates, when writter is nil' do
-      movie = FactoryBot.build(:movie, writter: nil)
-      movie.valid?
-      expect(movie.errors[:writter]).to include("can't be blank")
     end
   end
 
@@ -101,6 +87,5 @@ RSpec.describe Movie, type: :model do
     movie.production_companies << production_company
     expect(movie.production_companies.length).to eq(1)
   end
-
 
 end

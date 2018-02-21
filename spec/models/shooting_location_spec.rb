@@ -3,21 +3,21 @@ require 'rails_helper'
 RSpec.describe ShootingLocation, type: :model do
 
   it 'creates a Shooting Location' do
-    sleep(2) #this will avoid the Google Geocoder API error: OVER_QUERY_LIMIT
-    movie = FactoryBot.build(:movie)
+
+    movie = FactoryBot.create(:movie)
     shooting_location = FactoryBot.build(:shooting_location, movie: movie)
+    shooting_location.geocode
     shooting_location.valid?
 
     expect(shooting_location).to be_valid
   end
 
   it 'returns the right location coordinates when a valid address is provided' do
-    sleep(2) #this will avoid the Google Geocoder API error: OVER_QUERY_LIMIT
-
     movie = FactoryBot.build(:movie)
     shooting_location = FactoryBot.build(:shooting_location,
-                                          movie: movie, address: 'Reservoir Library',
+                                          movie: movie, landmark_name: 'Reservoir Library',
                                           city: 'Reservoir', country: 'Australia')
+    shooting_location.geocode
     shooting_location.valid?
 
     expect(shooting_location.latitude).to eq(-37.7165004)
@@ -30,6 +30,7 @@ RSpec.describe ShootingLocation, type: :model do
     shooting_location = FactoryBot.build(:shooting_location,
                                           movie: movie, latitude: -37.7165004, longitude: 145.0056593, address: '',
                                           city: '', country: '')
+    shooting_location.reverse_geocode
     shooting_location.valid?
     expect(shooting_location.address).to eq('23 Edwardes St, Reservoir VIC 3073, Australia')
   end

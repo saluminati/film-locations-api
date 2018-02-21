@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :v1, defaults: { format: :json } do
+  get '/all_locations', to: 'film_locations#show_all'
+end
 end
