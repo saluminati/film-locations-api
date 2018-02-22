@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+  scope :by_release_year, -> (release_year) { where("release_year = ?", release_year)}
+
   validates :title, presence: true
   #validates :writter, presence: true
   validates :director, presence: true

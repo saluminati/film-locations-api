@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe ProductionCompany, type: :model do
 
   it 'creates a Production Company' do
-    production_company = FactoryBot.create(:production_company)
+    production_company = FactoryBot.build(:production_company)
     production_company.valid?
     expect(production_company).to be_valid
   end
