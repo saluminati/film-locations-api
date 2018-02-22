@@ -5,6 +5,9 @@ API built using Rails which gives the locations where movie(s) have been filmed.
 
 > It supports San Francisco at the moment
 
+**Database schema**
+![Auto suggest movies](http://agilis-lab.com/temp/schema.jpg)
+
 
 ### Installation
 
