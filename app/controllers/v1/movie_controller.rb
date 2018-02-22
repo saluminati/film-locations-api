@@ -1,6 +1,6 @@
 class V1::MovieController < ApplicationController
 
-  def by_year
+  def by_city
     begin
       movies = Movie.eager_load(:shooting_locations).where('shooting_locations.city=?',query_params[:city])
       render json: {movies: movies.as_json}
